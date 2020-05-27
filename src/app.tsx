@@ -14,11 +14,11 @@ const App:React.SFC = ()=>{
           res.data.map((res:any)=>{return {ID:res.ID, name: res.name}})
         )
       })
-      if(Object.keys(shopConfig).length ===0)
+      if(Object.keys(shopConfig).length ===0 && shopConfig!== null)
         axios.get('http://127.0.0.1:8000/shops/'+data.ID).then((res:any)=>{
           console.log(res)
           setShopConfig(
-            res.data[0]
+            res.data
           )
         })
   })
@@ -26,7 +26,7 @@ const App:React.SFC = ()=>{
   return (
       <Router>
         <>
-        {shopConfig.logo && <img style={logoStyle} src={"http://127.0.0.1:8000/"+shopConfig?.logo} />}
+        {shopConfig?.logo && <img style={logoStyle} src={"http://127.0.0.1:8000/"+shopConfig?.logo} />}
 
         <CategoryBar categories={categories}/>
         <Switch>
